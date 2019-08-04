@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Curso de Spring Boot</title>
+<title>Cadastro Pessoa</title>
 <!--Import Google Icon Font-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
 <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
 </head>
+
 <body>
-	<h4>Spring Boot MVC com Thymeleaf e PostgreSQL</h4>
-	<a href="/cadastropessoa">Cadastrar</a>
+	<form action="salvarpessoa" method="post">
+		<label>Nome</label>
+		<input name="nome">
+		<label>Sobrenome</label>
+		<input name="sobrenome">
+		<label>idade</label>
+		<input name="idade">
+		<input class="waves-effect waves-light btn" type="submit" value="Salvar">
+	</form>
+	
+	<a href="/listapessoas">Listar pessoas</a>
+	
+	<table>
+		<tr th:each="pessoa : ${pessoas}">
+			<td th:text="${pessoa.id}"></td>
+			<td th:text="${pessoa.nome}"></td>
+			<td th:text="${pessoa.sobrenome}"></td>
+			<td th:text="${pessoa.idade}"></td>
+		</tr>
+	</table>
 	
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.js"></script>
