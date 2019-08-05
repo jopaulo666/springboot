@@ -22,8 +22,17 @@
 		<input name="idade" th:field="*{idade}">
 		<input class="waves-effect waves-light btn" type="submit" value="Salvar">
 	</form>
+	<br>
 	
 	<a href="/listapessoas">Listar pessoas</a>
+	<br>
+	<br>
+	
+	<form action="pesquisarpessoa" method="post">
+		<label>Pesquisar por nome</label>
+		<input name="nomepesquisa">
+		<input class="waves-effect waves-light btn" type="submit" value="Pesquisar">
+	</form>
 	
 	<table>
 		<tr th:each="pessoa : ${pessoas}">
