@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.joaopaulo.model.Pessoa;
+import com.joaopaulo.model.Telefone;
 import com.joaopaulo.repository.PessoaRepository;
+import com.joaopaulo.repository.TelefoneRepository;
 
 @Controller
 public class PessoaController {
@@ -21,10 +23,17 @@ public class PessoaController {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
+	@Autowired
+	private TelefoneRepository telefoneRepository;
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoaobj", new Pessoa());
+		//carerga pessoas
+		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
+		andView.addObject("pessoas", pessoasIt);
+		
 		return andView;
 	}
 	
@@ -43,6 +52,7 @@ public class PessoaController {
 	@RequestMapping(method = RequestMethod.GET, value = "/listapessoas")
 	public ModelAndView pessoas() {
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		//carerga pessoas
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("pessoas", pessoasIt);
 		andView.addObject("pessoaobj", new Pessoa());
@@ -55,7 +65,7 @@ public class PessoaController {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
-		andView.addObject("pessoaobj", pessoa);
+		andView.addObject("pessoaobj", pessoa.get());
 		return andView;
 	}
 	
@@ -77,6 +87,31 @@ public class PessoaController {
 		andView.addObject("pessoaobj", new Pessoa());
 		return andView;
 		
+	}
+	
+	@GetMapping("/telefones/{idpessoa}")
+	public ModelAndView telefones(@PathVariable("idpessoa") Long idpessoa) {
+		
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
+		
+		ModelAndView andView = new ModelAndView("cadastro/telefones");
+		andView.addObject("pessoaobj", pessoa.get()); // lista pessoas
+		andView.addObject("telefones", telefoneRepository.getTelefones(idpessoa)); // lista contatos
+		return andView;
+	}
+	
+	@PostMapping("**/addfonepessoa/{pessoaid}")
+	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
+		
+		Pessoa pessoa = pessoaRepository.findById(pessoaid).get(); //consulta pessoa
+		telefone.setPessoa(pessoa); //pega o telefone e coloca na pessoa
+		
+		telefoneRepository.save(telefone); // salva
+		
+		ModelAndView andView = new ModelAndView("cadastro/telefones");
+		andView.addObject("pessoaobj", pessoa);
+		andView.addObject("telefones", telefoneRepository.getTelefones(pessoaid)); //carrega a lista de contatos
+		return andView;
 	}
 
 }
