@@ -3,6 +3,7 @@ package com.joaopaulo.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Pessoa implements Serializable {
 	
 	private String idade;
 	
-	@OneToMany(mappedBy = "pessoa")
+	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)// salva, consulta remove tudo de uma vez
 	private List<Telefone> telefones;
 
 	public Long getId() {

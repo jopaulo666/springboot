@@ -57,7 +57,8 @@ form input[type=submit] {
 						class="validate" placeholder="exemple@exemplo.com">
 				</div>
 			</div>
-			<input type="submit" value="Adicionar" class="waves-effect waves-light btn">
+			<input type="submit" value="Adicionar" class="waves-effect waves-light btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/cadastropessoa">Voltar</a>
 		</form>
 	</div>
 	
@@ -72,7 +73,8 @@ form input[type=submit] {
 		<tr th:each="contato : ${telefones}">
 			<td th:text="${contato.celular}"/>
 			<td th:text="${contato.fone}"/>
-			<td th:text="${contato.email}"/>	
+			<td th:text="${contato.email}"/>
+			<td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${contato.id})}">Excluir</a> </td>
 		</tr>
 	</table>
 	
@@ -85,7 +87,8 @@ form input[type=submit] {
 <footer class="page-footer">
 	<div class="footer-copyright">
 		<div class="container">Desenvolvido por João Paulo da Mata
-			Mendes © 2019 - Todos os direitos reservados</div>
+			Mendes © 2019 - Todos os direitos reservados
+		</div>
 	</div>
 </footer>
 
