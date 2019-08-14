@@ -24,6 +24,12 @@ form input[type=submit] {
 	<h5>Cadastro de pessoas</h5><br>
 	
 	<div class="row">
+		<br>		
+		<div th:each="m : ${msg}">
+			<span th:text="${m}"></span>
+		</div>
+		<br>
+		
 		<form action="salvarpessoa" id="formpessoa" method="post" th:object="${pessoaobj}" class="col s12">
 			<div class="row">
 				<div class="input-field col s2">
@@ -35,24 +41,21 @@ form input[type=submit] {
 				<div class="input-field col s4">
 					<label for="nome" class="active">Nome</label>
 					<input name="nome" th:field="*{nome}" id="nome"
-						class="validate" placeholder="Primeiro nome"
-						required="required">
+						class="validate" placeholder="Primeiro nome">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s4">
 					<label for="sobrenome" class="active">Sobrenome</label>
 					<input name="sobrenome" th:field="*{sobrenome}" id="sobrenome"
-						class="validate" placeholder="Último nome"
-						required="required">
+						class="validate" placeholder="Último nome">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s4">
 					<label for="idade" class="active">idade</label>
-					<input name="idade" th:field="*{idade}" id="idade"
-						class="validate" placeholder="Anos"
-						required="required">
+					<input type="number" name="idade" th:field="*{idade}" id="idade"
+						class="validate" placeholder="Anos">
 				</div>
 			</div>
 			<div class="row">

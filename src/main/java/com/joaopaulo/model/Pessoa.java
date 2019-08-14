@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -19,10 +22,14 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotEmpty(message = "Nome obrigatório")
 	private String nome;
 	
+	@NotEmpty(message = "Sobrenome obrigatório")
 	private String sobrenome;
 	
+	@NotNull(message = "Idade é obrigatório")
+	@Min(value = 6, message = "Tem que ser maior de 6 anos")
 	private String idade;
 	
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)// salva, consulta remove tudo de uma vez

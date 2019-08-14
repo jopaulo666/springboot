@@ -1,9 +1,15 @@
 package com.joaopaulo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,13 +44,28 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarpessoa")
-	public ModelAndView salvar(Pessoa pessoa) {
+	public ModelAndView salvar(@Valid Pessoa pessoa, BindingResult bindingResult) {
+		//faz a validaçao
+		if (bindingResult.hasErrors()) {
+			ModelAndView andView = new ModelAndView("cadastro/cadastropessoa"); // retorna pre mesma tela
+			Iterable<Pessoa> pessoasIt = pessoaRepository.findAll(); // consulta todos
+			andView.addObject("pessoas", pessoasIt); // passa a lista de pessoas
+			andView.addObject("pessoaobj", pessoa); //retorna a mesma pessoa
+			
+			List<String> msg = new ArrayList<String>();
+			for (ObjectError objectError : bindingResult.getAllErrors()) { // pega todos os erros
+				msg.add(objectError.getDefaultMessage()); //pega a msg das anotações do model
+			}
+			andView.addObject("msg", msg);
+			return andView;
+		}
+		
 		pessoaRepository.save(pessoa);
 		
-		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
-		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa"); // retorna pre mesma tela
+		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll(); // consulta todos
 		andView.addObject("pessoas", pessoasIt);
-		andView.addObject("pessoaobj", new Pessoa());
+		andView.addObject("pessoaobj", new Pessoa()); //nova pessoa
 		
 		return andView;
 	}
@@ -104,11 +125,30 @@ public class PessoaController {
 	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
 		
 		Pessoa pessoa = pessoaRepository.findById(pessoaid).get(); //consulta pessoa
+		
+		if (telefone != null && telefone.getCelular().isEmpty() || telefone.getEmail().isEmpty()) {
+			ModelAndView andView = new ModelAndView("cadastro/telefones");
+			andView.addObject("pessoaobj", pessoa); // objeto pai
+			andView.addObject("telefones", telefoneRepository.getTelefones(pessoaid)); //objeto filho
+			
+			List<String> msg = new ArrayList<String>();
+			if (telefone.getCelular().isEmpty()) {
+				msg.add("Informe um número de celular");				
+			}
+			if (telefone.getEmail().isEmpty()) {
+				msg.add("Informe um endereço de e-mail");				
+			}
+			andView.addObject("msg", msg);
+			
+			return andView; // para a execução do código
+		}
+		
+		ModelAndView andView = new ModelAndView("cadastro/telefones");
+		
 		telefone.setPessoa(pessoa); //pega o telefone e coloca na pessoa
 		
 		telefoneRepository.save(telefone); // salva
 		
-		ModelAndView andView = new ModelAndView("cadastro/telefones");
 		andView.addObject("pessoaobj", pessoa);
 		andView.addObject("telefones", telefoneRepository.getTelefones(pessoaid)); //carrega a lista de contatos
 		return andView;
