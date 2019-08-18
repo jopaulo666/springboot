@@ -1,5 +1,6 @@
 package com.joaopaulo.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +15,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration // classe de configuração
 @EnableWebSecurity // classe de segurança
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private ImplementacaoUserDetailsService implementacaoUserDetailsService;
 
 	@Override //solicita as solicitações de acesso por HTTP
 	protected void configure(HttpSecurity http) throws Exception {
@@ -29,10 +33,12 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 	
 	@Override // cria autenticação do usuário com banco de dados ou em memória
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()) //NoOpPasswordEncoder.getInstance()
-			.withUser("joao")
-			.password("$2a$10$fS0cIL2FxiYhas.BC5O0yeyLurk71vVlhuAHfmaleZlgYfN5ajUu6")
-			.roles("ADMIN");
+		auth.userDetailsService(implementacaoUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		
+//		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()) //NoOpPasswordEncoder.getInstance()
+//			.withUser("joao")
+//			.password("$2a$10$fS0cIL2FxiYhas.BC5O0yeyLurk71vVlhuAHfmaleZlgYfN5ajUu6")
+//			.roles("ADMIN");
 	}
 	
 	@Override // iguinora url específicas (CSS, JavaScript...)
