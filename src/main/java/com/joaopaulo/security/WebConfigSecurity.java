@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -26,12 +27,12 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout")); // invalida sessão
 	}
 	
-	@Override // cria autenticação do usuário com banco de dados ou em meméria
+	@Override // cria autenticação do usuário com banco de dados ou em memória
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
+		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()) //NoOpPasswordEncoder.getInstance()
 			.withUser("joao")
-			.password("123")
-			.roles("admin");
+			.password("$2a$10$fS0cIL2FxiYhas.BC5O0yeyLurk71vVlhuAHfmaleZlgYfN5ajUu6")
+			.roles("ADMIN");
 	}
 	
 	@Override // iguinora url específicas (CSS, JavaScript...)
