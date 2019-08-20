@@ -6,9 +6,10 @@
 <title>Cadastro Pessoa</title>
 <!--Import Google Icon Font-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!--Import materialize.css-->
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <style type="text/css">
 	table.striped>tbody>tr:nth-child(odd) {
@@ -82,7 +83,7 @@ form input[type=submit] {
 		</form>
 	</div>
 
-	<table class="striped">
+	<table class="striped centered">
 		<thead>
 			<tr>
 				<th>Código</th>
@@ -102,10 +103,6 @@ form input[type=submit] {
 			<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
 		</tr>
 	</table>
-	
-	<!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="materialize/js/materialize.js"></script>
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 
         <footer class="page-footer">
