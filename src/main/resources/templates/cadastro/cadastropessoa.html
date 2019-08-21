@@ -58,6 +58,16 @@ form input[type=submit] {
 						class="validate" placeholder="Último nome">
 				</div>
 			</div>
+			<div class="row">
+				<div class="input-field col s4">
+					<label for="sexo" class="active">Sexo</label>
+					<select class="browser-default" th:field="*{sexo}">
+						<option value="" disabled selected>Selecione uma opção</option>
+						<option value="MASCULINO" th:text="Masculino">
+						<option value="FEMININO" th:text="Feminino">
+					</select>
+				</div>
+			</div>
 			<div class="row" sec:authorize="hasRole('ROLE_ADMIN')"> <!-- hasAnyRole para mais de um -->
 				<div class="input-field col s4">
 					<label for="idade" class="active">idade</label>
@@ -76,35 +86,35 @@ form input[type=submit] {
 				<div class="input-field col s4">
 					<label for="rua" class="active">Rua</label>
 					<input name="rua" th:field="*{rua}" id="rua"
-						class="validate" placeholder="Ex Av Presidente Vargas">
+						class="validate" placeholder="Ex: Av Presidente Vargas">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s4">
 					<label for="bairro" class="active">Bairro</label>
 					<input name="bairro" th:field="*{bairro}" id="bairro"
-						class="validate" placeholder="Ex Batista Campos">
+						class="validate" placeholder="Ex: Batista Campos">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s4">
 					<label for="complemento" class="active">Complemento (opcional)</label>
 					<input name="complemento" th:field="*{complemento}" id="complemento"
-						class="validate" placeholder="Ex ao lado de um padaria ou casa de esquina">
+						class="validate" placeholder="Ex: ao lado de um padaria ou casa de esquina">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s4">
 					<label for="cidade" class="active">Cidade</label>
 					<input name="cidade" th:field="*{cidade}" id="cidade"
-						class="validate" placeholder="Ex Belém">
+						class="validate" placeholder="Ex: Belém">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s4">
 					<label for="uf" class="active">Estado</label>
 					<input name="uf" th:field="*{uf}" id="uf"
-						class="validate" placeholder="Ex PA">
+						class="validate" placeholder="Ex: PA">
 				</div>
 			</div>
 			<div class="row">
