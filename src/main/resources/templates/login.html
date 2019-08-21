@@ -20,26 +20,31 @@ form input[type=submit] {
 </style>
 </head>
 <body>
-	<h4>Login</h4>
 	
-	<form th:action="@{/login}" method="post" class="col s12">
-		<div class="row">
-			<div class="input-fiel col s4">
-				<label>Usuário</label>
-				<input type="text" name="username">
-			</div>
+	<div class="row">
+		<div class="input-field col s12">
+			<h4>Login</h4>
+			
+			<form th:action="@{/login}" method="post" class="col s12">
+				<div class="row">
+					<div class="input-fiel col s4">
+						<label>Usuário</label>
+						<input type="text" name="username">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-fiel col s4">
+						<label>Senha</label>
+						<input type="password" name="password">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s4">
+						<input class="waves-effect waves-light btn" type="submit" value="Entrar">
+					</div>
+				</div>
+			</form>
 		</div>
-		<div class="row">
-			<div class="input-fiel col s4">
-				<label>Senha</label>
-				<input type="password" name="password">
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s4">
-				<input class="waves-effect waves-light btn" type="submit" value="Entrar">
-			</div>
-		</div>
-	</form>
+	</div>
 </body>
 </html>

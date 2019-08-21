@@ -44,79 +44,87 @@ form input[type=submit] {
 					<input name="id" th:field="*{id}" readonly="readonly" id="id" class="validate">
 				</div>
 			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="nome" class="active">Nome</label>
-					<input name="nome" th:field="*{nome}" id="nome"
-						class="validate" placeholder="Primeiro nome">
+			<fieldset>
+				<legend>Dados pessoais</legend>
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="nome" class="active">Nome</label>
+						<input name="nome" th:field="*{nome}" id="nome"
+							class="validate" placeholder="Primeiro nome">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="sobrenome" class="active">Sobrenome</label>
-					<input name="sobrenome" th:field="*{sobrenome}" id="sobrenome"
-						class="validate" placeholder="Último nome">
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="sobrenome" class="active">Sobrenome</label>
+						<input name="sobrenome" th:field="*{sobrenome}" id="sobrenome"
+							class="validate" placeholder="Último nome">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="sexo" class="active">Sexo</label>
-					<select class="browser-default" th:field="*{sexo}">
-						<option value="" disabled selected>Selecione uma opção</option>
-						<option value="MASCULINO" th:text="Masculino">
-						<option value="FEMININO" th:text="Feminino">
-					</select>
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="sexo" class="active">Sexo</label>
+						<select class="browser-default" th:field="*{sexo}">
+							<option value="" disabled selected>Selecione uma opção</option>
+							<option value="MASCULINO" th:text="Masculino">
+							<option value="FEMININO" th:text="Feminino">
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="row" sec:authorize="hasRole('ROLE_ADMIN')"> <!-- hasAnyRole para mais de um -->
-				<div class="input-field col s4">
-					<label for="idade" class="active">idade</label>
-					<input type="number" name="idade" th:field="*{idade}" id="idade"
-						class="validate" placeholder="Anos">
+				<div class="row" sec:authorize="hasRole('ROLE_ADMIN')"> <!-- hasAnyRole para mais de um -->
+					<div class="input-field col s4">
+						<label for="idade" class="active">idade</label>
+						<input type="number" name="idade" th:field="*{idade}" id="idade"
+							class="validate" placeholder="Anos">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="cep" class="active">CEP</label>
-					<input name="cep" th:field="*{cep}" id="cep"
-						class="validate" placeholder="Somente números">
+			</fieldset>
+			<fieldset>
+			<br>
+			<br>
+				<legend>Endereço</legend>
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="cep" class="active">CEP</label>
+						<input name="cep" th:field="*{cep}" id="cep"
+							class="validate" placeholder="Somente números">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="rua" class="active">Rua</label>
-					<input name="rua" th:field="*{rua}" id="rua"
-						class="validate" placeholder="Ex: Av Presidente Vargas">
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="rua" class="active">Rua</label>
+						<input name="rua" th:field="*{rua}" id="rua"
+							class="validate" placeholder="Ex: Av Presidente Vargas">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="bairro" class="active">Bairro</label>
-					<input name="bairro" th:field="*{bairro}" id="bairro"
-						class="validate" placeholder="Ex: Batista Campos">
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="bairro" class="active">Bairro</label>
+						<input name="bairro" th:field="*{bairro}" id="bairro"
+							class="validate" placeholder="Ex: Batista Campos">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="complemento" class="active">Complemento (opcional)</label>
-					<input name="complemento" th:field="*{complemento}" id="complemento"
-						class="validate" placeholder="Ex: ao lado de um padaria ou casa de esquina">
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="complemento" class="active">Complemento (opcional)</label>
+						<input name="complemento" th:field="*{complemento}" id="complemento"
+							class="validate" placeholder="Ex: ao lado de um padaria ou casa de esquina">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="cidade" class="active">Cidade</label>
-					<input name="cidade" th:field="*{cidade}" id="cidade"
-						class="validate" placeholder="Ex: Belém">
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="cidade" class="active">Cidade</label>
+						<input name="cidade" th:field="*{cidade}" id="cidade"
+							class="validate" placeholder="Ex: Belém">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s4">
-					<label for="uf" class="active">Estado</label>
-					<input name="uf" th:field="*{uf}" id="uf"
-						class="validate" placeholder="Ex: PA">
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="uf" class="active">Estado</label>
+						<input name="uf" th:field="*{uf}" id="uf"
+							class="validate" placeholder="Ex: PA">
+					</div>
 				</div>
-			</div>
+			</fieldset>
 			<div class="row">
 				<div class="input-field col s4">
 					<input class="waves-effect waves-light btn" type="submit" value="Salvar">
@@ -126,40 +134,71 @@ form input[type=submit] {
 			</div>
 		</form>
 	</div>
-
+	
+	
 	<div class="row">
 		<form action="pesquisarpessoa" method="post" class="col s12">
-			<div class="row">
-				<div class="input-field col s6">
-					<label for="nomepesquisa" class="active">Pesquisar por nome</label>
-					<input name="nomepesquisa" id="nomepesquisa" class="validate">
-					<input class="waves-effect waves-light btn" type="submit" value="Pesquisar">
-					<a class="waves-effect waves-light btn" href="/listapessoas">Listar pessoas</a>
+			<fieldset>
+				<legend>Pesquisar clientes</legend>
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="nomepesquisa" class="active">Nome</label>
+						<input name="nomepesquisa" id="nomepesquisa" class="validate">
+					</div>										
 				</div>
-			</div>
+				<div class="row">
+					<div class="input-field col s4">
+						<label for="pesqsexo" class="active">Sexo</label>
+						<select class="browser-default" name="pesqsexo" id="pesqsexo">
+							<option value="" disabled selected>Selecione uma opção</option>
+							<option value="MASCULINO" th:text="Masculino">
+							<option value="FEMININO" th:text="Feminino">
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input class="waves-effect waves-light btn" type="submit" value="Pesquisar"> 
+					</div>
+				</div>
+			</fieldset>
 		</form>
 	</div>
-
-	<table class="striped centered">
-		<thead>
-			<tr>
-				<th>Código</th>
-				<th>Nome</th>
-				<th>Sobrenome</th>
-				<th>Idade</th>
-				<th>Editar</th>
-				<th>Excluir</th>
-			</tr>
-		</thead>
-		<tr th:each="pessoa : ${pessoas}">
-			<td th:text="${pessoa.id}"></td>
-			<td><a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text="${pessoa.nome}"></span></a></td>
-			<td th:text="${pessoa.sobrenome}"></td>
-			<td th:text="${pessoa.idade}"></td>
-			<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
-			<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
-		</tr>
-	</table>
+	
+	
+	<div class="row">
+		<div class="input-field col s6">
+			<a class="waves-effect waves-light btn" href="/listapessoas">Listar pessoas</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="input-field col s12">
+			<fieldset>
+				<legend>Lista de pessoas cadastradas</legend>
+				<table class="striped centered">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Sobrenome</th>
+							<th>Idade</th>
+							<th>Editar</th>
+							<th>Excluir</th>
+						</tr>
+					</thead>
+					<tr th:each="pessoa : ${pessoas}">
+						<td th:text="${pessoa.id}"></td>
+						<td><a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text="${pessoa.nome}"></span></a></td>
+						<td th:text="${pessoa.sobrenome}"></td>
+						<td th:text="${pessoa.idade}"></td>
+						<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
+						<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
+					</tr>
+				</table>
+			</fieldset>
+		</div>
+	</div>
 	
 	<!-- Adicionando Javascript -->
     <script type="text/javascript" >
