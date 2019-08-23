@@ -137,7 +137,7 @@ form input[type=submit] {
 	
 	
 	<div class="row">
-		<form action="pesquisarpessoa" method="post" class="col s12">
+		<form action="pesquisarpessoa" method="post" class="col s12" id="pesquisarpessoa">
 			<fieldset>
 				<legend>Pesquisar clientes</legend>
 				<div class="row">
@@ -163,12 +163,13 @@ form input[type=submit] {
 				</div>
 			</fieldset>
 		</form>
-	</div>
-	
+	</div>	
 	
 	<div class="row">
-		<div class="input-field col s6">
+		<div class="input-field col s4">
 			<a class="waves-effect waves-light btn" href="/listapessoas">Listar pessoas</a>
+			<input class="waves-effect waves-light btn" type="submit"
+				value="Imprimir lista" onclick="document.getElementById('pesquisarpessoa').method = 'get'">
 		</div>
 	</div>
 	

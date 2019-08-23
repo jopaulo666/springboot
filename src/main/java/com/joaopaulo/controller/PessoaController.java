@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class PessoaController {
 	
 	@Autowired
 	private TelefoneRepository telefoneRepository;
+	
+	@Autowired
+	private ReportUtil reportUtil; 
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
@@ -115,7 +120,14 @@ public class PessoaController {
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoas", pessoas);
 		andView.addObject("pessoaobj", new Pessoa());
-		return andView;
+		return andView;		
+	}
+	
+	@GetMapping("**/pesquisarpessoa") // não tem retorno
+	public void ImprimiPDF(@RequestParam("nomepesquisa") String nomepesquisa,
+			@RequestParam("pesqsexo") String pesqsexo,
+			HttpServletRequest request,
+			HttpServletResponse response) {
 		
 	}
 	
