@@ -22,13 +22,13 @@ public class ReportUtil  implements Serializable{
 	public byte[] gerarRelatorio (List listDados, String relatorio, ServletContext servletContext) throws JRException {
 		
 		// cria a lista de dados para o relatório com a lista de objetos para imprimir
-		JRBeanCollectionDataSource jrvcds = new JRBeanCollectionDataSource(listDados);
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(listDados);
 		
 		// carrega o caminho do arquivo jasper compilado
 		String caminhoJasper = servletContext.getRealPath("relatorios") + File.separator + relatorio + ".jasper";
 		
 		// carrega o arquivo jasper passando dados
-		JasperPrint impressoraJasper = JasperFillManager.fillReport(caminhoJasper, new HashMap(), jrvcds);
+		JasperPrint impressoraJasper = JasperFillManager.fillReport(caminhoJasper, new HashMap(), dataSource);
 		
 		//exporta oara byte[] para fazer o dawnload do PDF
 		return JasperExportManager.exportReportToPdf(impressoraJasper);

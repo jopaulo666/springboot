@@ -126,7 +126,7 @@ public class PessoaController {
 	}
 	
 	@GetMapping("**/pesquisarpessoa") // não tem retorno
-	public void ImprimiPDF(@RequestParam("nomepesquisa") String nomepesquisa,
+	public void ImprimePDF(@RequestParam("nomepesquisa") String nomepesquisa,
 			@RequestParam("pesqsexo") String pesqsexo,
 			HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
