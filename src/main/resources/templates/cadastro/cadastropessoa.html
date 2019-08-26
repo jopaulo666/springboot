@@ -74,7 +74,7 @@ form input[type=submit] {
 					<div class="input-field col s4">
 						<label for="idade" class="active">idade</label>
 						<input type="number" name="idade" th:field="*{idade}" id="idade"
-							class="validate" placeholder="Anos">
+							class="validate" placeholder="Somente números">
 					</div>
 				</div>
 			</fieldset>
@@ -133,8 +133,7 @@ form input[type=submit] {
 				</div>
 			</div>
 		</form>
-	</div>
-	
+	</div>	
 	
 	<div class="row">
 		<form action="pesquisarpessoa" method="post" class="col s12" id="pesquisarpessoa">
@@ -167,7 +166,7 @@ form input[type=submit] {
 	
 	<div class="row">
 		<div class="input-field col s4">
-			<a class="waves-effect waves-light btn" href="/listapessoas">Listar pessoas</a>
+			<a class="waves-effect waves-light btn" href="/listapessoas">Listar todos</a>
 			<input class="waves-effect waves-light btn" type="submit"
 				value="Imprimir lista" onclick="document.getElementById('pesquisarpessoa').method = 'get'">
 		</div>

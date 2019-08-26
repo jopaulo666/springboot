@@ -25,6 +25,8 @@ import com.joaopaulo.model.Telefone;
 import com.joaopaulo.repository.PessoaRepository;
 import com.joaopaulo.repository.TelefoneRepository;
 
+import net.sf.jasperreports.engine.JRException;
+
 @Controller
 public class PessoaController {
 	
@@ -127,8 +129,34 @@ public class PessoaController {
 	public void ImprimiPDF(@RequestParam("nomepesquisa") String nomepesquisa,
 			@RequestParam("pesqsexo") String pesqsexo,
 			HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws Exception {
 		
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		if (pesqsexo != null && !pesqsexo.isEmpty() && nomepesquisa != null && !nomepesquisa.isEmpty()) {
+			pessoas = pessoaRepository.findPessoaByNameSexo(pesqsexo, nomepesquisa);
+		} else if (nomepesquisa != null && !nomepesquisa.isEmpty()){
+			pessoas = pessoaRepository.findPessoaByName(nomepesquisa);
+		} else if (pesqsexo != null && !pesqsexo.isEmpty()){
+			pessoas = pessoaRepository.findPessoaBySexo(pesqsexo);
+		}
+		else {
+			Iterable<Pessoa> iterator = pessoaRepository.findAll();
+			for (Pessoa pessoa : iterator) {
+				pessoas.add(pessoa);
+			}
+		}
+		//chama o serviço que faz a geração do relarório
+		byte[] pdf = reportUtil.gerarRelatorio(pessoas, "pessoa", request.getServletContext());
+		//tamanho da resposta
+		response.setContentLength(pdf.length);
+		//definir na resposta o tipo de caminho
+		response.setContentType("application/octet-stream");
+		//definir cabeçalho da resposta
+		String headerKey = "Content-Disposition";
+		String headerValue = String.format("attachment; filename=\"%s\"", "relatorio.pdf");
+		response.setHeader(headerKey, headerValue);
+		//finaliza a resposta pro navegador
+		response.getOutputStream().write(pdf);
 	}
 	
 	@GetMapping("/telefones/{idpessoa}")
