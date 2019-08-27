@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -54,6 +55,17 @@ public class Pessoa implements Serializable {
 	
 	@NotEmpty(message = "Sexo obrigatório")
 	private String sexo;
+	
+	@ManyToOne
+	private Profissao profissao;
+	
+	public Profissao getProfissao() {
+		return profissao;
+	}
+	
+	public void setProfissao(Profissao profissao) {
+		this.profissao = profissao;
+	}
 	
 	public String getSexo() {
 		return sexo;

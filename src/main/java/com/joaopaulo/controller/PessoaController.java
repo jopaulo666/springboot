@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.joaopaulo.model.Pessoa;
 import com.joaopaulo.model.Telefone;
 import com.joaopaulo.repository.PessoaRepository;
+import com.joaopaulo.repository.ProfissaoRepository;
 import com.joaopaulo.repository.TelefoneRepository;
 
 import net.sf.jasperreports.engine.JRException;
@@ -37,7 +38,10 @@ public class PessoaController {
 	private TelefoneRepository telefoneRepository;
 	
 	@Autowired
-	private ReportUtil reportUtil; 
+	private ReportUtil reportUtil;
+	
+	@Autowired
+	private ProfissaoRepository profissaoRepository; 
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
@@ -46,6 +50,7 @@ public class PessoaController {
 		//carerga pessoas
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("pessoas", pessoasIt);
+		andView.addObject("profissoes", profissaoRepository.findAll());
 		
 		return andView;
 	}
@@ -66,6 +71,7 @@ public class PessoaController {
 				msg.add(objectError.getDefaultMessage()); //pega a msg das anotações do model
 			}
 			andView.addObject("msg", msg);
+			andView.addObject("profissoes", profissaoRepository.findAll());
 			return andView;
 		}
 		
@@ -96,6 +102,7 @@ public class PessoaController {
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoaobj", pessoa.get());
+		andView.addObject("profissoes", profissaoRepository.findAll());
 		return andView;
 	}
 	
